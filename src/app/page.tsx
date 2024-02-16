@@ -1,7 +1,7 @@
-import { Button } from "@/components/button";
+import { redirect } from "next/navigation";
 
 const RootPage = async () => {
-  return <Button>Test</Button>;
+  return redirect("/dashboard");
 };
 
 export default RootPage;
