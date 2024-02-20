@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-const RootPage = async () => {
+const RootPage = () => {
   return redirect("/dashboard");
 };
 
