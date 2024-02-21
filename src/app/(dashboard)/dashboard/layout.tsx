@@ -39,7 +39,7 @@ const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
   const unseenRequestCount = (
     (await fetchRedis(
       "smembers",
-      `user:${session.user.id}:icoming_friend_requests`
+      `user:${session.user.id}:incoming_friend_requests`
     )) as User[]
   ).length;
 
