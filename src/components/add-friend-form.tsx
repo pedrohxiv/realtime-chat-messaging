@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Button } from "@/components/button";
-import { addFriendValidator } from "@/lib/validations/add-friend";
+import { addFriendValidator } from "@/validations/add-friend";
 
 export const AddFriendForm = () => {
   const [showSuccessState, setShowSuccessState] = useState<boolean>(false);
@@ -60,7 +60,7 @@ export const AddFriendForm = () => {
           className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-md ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           placeholder="name@example.com"
         />
-        <Button>Add</Button>
+        <Button variant='indigo'>Add</Button>
       </div>
       <p className="mt-1 text-sm text-red-600">{errors.email?.message}</p>
       {showSuccessState && (

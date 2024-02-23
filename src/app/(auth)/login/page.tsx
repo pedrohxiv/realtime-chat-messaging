@@ -34,6 +34,7 @@ const LoginPage = () => {
             </h2>
           </div>
           <Button
+            variant="indigo"
             isLoading={isLoading}
             type="button"
             className="max-w-sm mx-auto w-full"

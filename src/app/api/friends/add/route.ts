@@ -4,7 +4,7 @@ import { z } from "zod";
 import { fetchRedis } from "@/helpers/redis";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { addFriendValidator } from "@/lib/validations/add-friend";
+import { addFriendValidator } from "@/validations/add-friend";
 
 export async function POST(req: Request) {
   try {
