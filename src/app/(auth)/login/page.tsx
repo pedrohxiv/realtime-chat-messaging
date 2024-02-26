@@ -1,10 +1,11 @@
 "use client";
 
+import { Loader2 } from "lucide-react";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
-import { toast } from "sonner";
 
 import { Button } from "@/components/button";
 
@@ -35,12 +36,16 @@ const LoginPage = () => {
           </div>
           <Button
             variant="indigo"
-            isLoading={isLoading}
+            disabled={isLoading}
             type="button"
             className="max-w-sm mx-auto w-full"
             onClick={onClick}
           >
-            {!isLoading && <FcGoogle className="mr-2 h-5 w-5" />}
+            {isLoading ? (
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            ) : (
+              <FcGoogle className="mr-2 h-5 w-5" />
+            )}
             Login with Google
           </Button>
         </div>

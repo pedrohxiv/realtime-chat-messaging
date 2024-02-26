@@ -1,10 +1,10 @@
 "use client";
 
 import axios from "axios";
-import { SendHorizontal } from "lucide-react";
+import { Loader2, SendHorizontal } from "lucide-react";
 import { useRef, useState } from "react";
+import { toast } from "react-hot-toast";
 import TextareaAutosize from "react-textarea-autosize";
-import { toast } from "sonner";
 
 import { Button } from "@/components/button";
 
@@ -20,6 +20,10 @@ export const ChatInput = ({ chatPartner, chatId }: ChatInputProps) => {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   const sendMessage = async () => {
+    if (!input) {
+      return;
+    }
+
     try {
       setIsLoading(true);
 
@@ -50,6 +54,7 @@ export const ChatInput = ({ chatPartner, chatId }: ChatInputProps) => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder={`Message to ${chatPartner.name}`}
+          disabled={isLoading}
           className="block w-full resize-none border-0 bg-transparent text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:py-1.5 sm:text-sm sm:leading-6"
         />
         <div
@@ -64,13 +69,17 @@ export const ChatInput = ({ chatPartner, chatId }: ChatInputProps) => {
         <div className="absolute right-0 bottom-0 flex justify-between py-2 pl-3 pr-2">
           <div className="flex-shrink-0">
             <Button
-            variant='indigo'
+              variant="indigo"
               onClick={sendMessage}
               className="rounded-full"
               type="submit"
-              isLoading={isLoading}
+              disabled={isLoading || !input}
             >
-              <SendHorizontal className="h-5 w-5" />
+              {isLoading ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <SendHorizontal className="h-5 w-5" />
+              )}
             </Button>
           </div>
         </div>

@@ -1,5 +1,4 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import { Loader2 } from "lucide-react";
 import { type ButtonHTMLAttributes } from "react";
 
 import { cn } from "@/lib/utils";
@@ -11,7 +10,7 @@ const buttonVariants = cva(
       variant: {
         default: "bg-slate-900 text-white hover:bg-slate-800",
         ghost: "bg-transparent hover:text-slate-900 hover:bg-slate-200",
-        indigo: 'bg-indigo-600 text-white hover:bg-indigo-600/80'
+        indigo: "bg-indigo-600 text-white hover:bg-indigo-600/80",
       },
       size: {
         default: "h-10 py-2 px-4",
@@ -28,25 +27,20 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  isLoading?: boolean;
-}
+    VariantProps<typeof buttonVariants> {}
 
 export const Button = ({
   className,
   children,
   variant,
-  isLoading,
   size,
   ...props
 }: ButtonProps) => {
   return (
     <button
       className={cn(buttonVariants({ variant, size, className }))}
-      disabled={isLoading}
       {...props}
     >
-      {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
       {children}
     </button>
   );

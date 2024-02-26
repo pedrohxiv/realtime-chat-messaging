@@ -3,7 +3,7 @@
 import { Loader2, LogOut } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
-import { toast } from "sonner";
+import { toast } from "react-hot-toast";
 
 import { Button } from "@/components/button";
 

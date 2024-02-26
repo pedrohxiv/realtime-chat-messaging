@@ -2,9 +2,10 @@
 
 import { format } from "date-fns";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import { cn } from "@/lib/utils";
+import { pusherClient } from "@/lib/pusher";
+import { cn, toPusherKey } from "@/lib/utils";
 import type { Message } from "@/validations/messages";
 
 interface MessagesProps {
@@ -12,6 +13,7 @@ interface MessagesProps {
   sessionId: string;
   sessionImg: string | null | undefined;
   chatPartner: User;
+  chatId: string;
 }
 
 export const Messages = ({
@@ -19,10 +21,26 @@ export const Messages = ({
   sessionId,
   sessionImg,
   chatPartner,
+  chatId,
 }: MessagesProps) => {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
 
   const scrollDownRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    pusherClient.subscribe(toPusherKey(`chat:${chatId}`));
+
+    const messageHandler = (message: Message) => {
+      setMessages((prev) => [message, ...prev]);
+    };
+
+    pusherClient.bind("incoming_message", messageHandler);
+
+    return () => {
+      pusherClient.unsubscribe(toPusherKey(`chat:${chatId}`));
+      pusherClient.unbind("incoming_message", messageHandler);
+    };
+  }, []);
 
   return (
     <div

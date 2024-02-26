@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { FriendRequestsSidebarOption } from "@/components/friend-requests-sidebar-option";
+import { FriendRequestsSidebarOptions } from "@/components/friend-requests-sidebar-options";
 import { SidebarChatList } from "@/components/sidebar-chat-list";
 import { SignOutButton } from "@/components/sign-out-button";
 import { getFriendsByUserId } from "@/data/get-friends-by-user-id";
@@ -88,7 +88,7 @@ const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
                   </li>
                 ))}
                 <li>
-                  <FriendRequestsSidebarOption
+                  <FriendRequestsSidebarOptions
                     sessionId={session.user.id}
                     initialUnseenRequestCount={unseenRequestCount}
                   />
@@ -124,7 +124,10 @@ const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
           </ul>
         </nav>
       </div>
-      {children}
+
+      <aside className="max-h-screen container py-16 md:py-12 w-full">
+        {children}
+      </aside>
     </div>
   );
 };

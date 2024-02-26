@@ -1,6 +1,6 @@
 "use client";
 
-import { Toaster } from "sonner";
+import { Toaster } from "react-hot-toast";
 
 interface ProvidersProps {
   children: React.ReactNode;
@@ -9,7 +9,7 @@ interface ProvidersProps {
 export const Providers = ({ children }: ProvidersProps) => {
   return (
     <>
-      <Toaster richColors position="top-center" />
+      <Toaster position="top-center" />
       {children}
     </>
   );
