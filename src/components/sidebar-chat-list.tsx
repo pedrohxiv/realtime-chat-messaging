@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
@@ -18,9 +18,9 @@ export const SidebarChatList = ({
   friends,
 }: SidebarChatListProps) => {
   const pathname = usePathname();
-  const router = useRouter();
 
   const [unseenMessages, setUnseenMessages] = useState<Message[]>([]);
+  const [activeChats, setActiveChats] = useState<User[]>(friends);
 
   useEffect(() => {
     if (pathname?.includes("chat")) {
@@ -59,8 +59,8 @@ export const SidebarChatList = ({
       setUnseenMessages((prev) => [...prev, message]);
     };
 
-    const newFriendHandler = () => {
-      router.refresh();
+    const newFriendHandler = (newFriend: User) => {
+      setActiveChats((prev) => [...prev, newFriend]);
     };
 
     pusherClient.bind("new_message", chatHandler);
@@ -73,11 +73,11 @@ export const SidebarChatList = ({
       pusherClient.unbind("new_message", chatHandler);
       pusherClient.unbind("new_friend", newFriendHandler);
     };
-  }, [pathname, sessionId, router]);
+  }, [pathname, sessionId]);
 
   return (
     <ul role="list" className="max-h-[25rem] overflow-y-auto -mx-2 space-y-1">
-      {friends.sort().map((friend) => {
+      {activeChats.sort().map((friend) => {
         const unseenMessagesCount = unseenMessages.filter(
           (unseenMsg) => unseenMsg.senderId === friend.id
         ).length;

@@ -1,18 +1,17 @@
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
+import { Skeleton } from "@/components/skeleton";
 
 const RequestsLoading = () => {
   return (
     <div className="w-full flx flex-col gap-1">
-      <Skeleton className="mb-8" height={55} width={285} />
+      <Skeleton className="h-14 w-72 mb-8" />
       <div className="flex">
-        <Skeleton className="mr-3" height={30} width={30} circle />
-        <Skeleton className="mr-2" height={30} width={180} />
-        <Skeleton className="mr-4" height={30} width={30} circle />
-        <Skeleton height={30} width={30} circle />
+        <Skeleton className="h-8 w-8 rounded-full mr-3" />
+        <Skeleton className="h-8 w-44 mr-2" />
+        <Skeleton className="h-8 w-8 rounded-full mr-4" />
+        <Skeleton className="h-8 w-8 rounded-full" />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default RequestsLoading
+export default RequestsLoading;

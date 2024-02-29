@@ -6,6 +6,8 @@ import { fetchRedis } from "@/helpers/redis";
 import { authOptions } from "@/lib/auth";
 
 const RequestsPage = async () => {
+  await new Promise((r) => setTimeout(r, 5000));
+  
   const session = await getServerSession(authOptions);
 
   if (!session) {
